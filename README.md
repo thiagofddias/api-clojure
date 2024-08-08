@@ -1,6 +1,8 @@
-# servico-clojure
+# Api-Clojure
 
-A Clojure library designed to ... well, that part is up to you.
+A Clojure project made with base in a journey clojure: 🔗 https://www.youtube.com/playlist?list=PLcjDvROHY58NpVqhOyafHL8iTmGGDT9DZ
+
+The projetct consist in a CRUD from tasks, with the user being atle create, read, delete and update tasks. 
 
 ## Usage
 
