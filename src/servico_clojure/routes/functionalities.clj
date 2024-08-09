@@ -1,5 +1,4 @@
 (ns servico-clojure.routes.functionalities
-  (:require [com.stuartsierra.component :as component])
   (:import (java.util UUID)))
 
 (defn list-tasks [request]
@@ -16,25 +15,23 @@
         store (:store request)]
     (swap! store assoc uuid task)
     {:status 200 :body {:message "Task registered successfully"
-                        :task   task}}))
+                        :task    task}}))
 
 (defn fn-hello [request]
-  {:status 200 :body (str "Hello " (get-in request [:query-params :name] " Everybody"))})
+  {:status 200 :body (str "Hello " (get-in request [:query-params :name] "Everybody"))})
 
 (defn remove-tasks [request]
   (let [store (:store request)
-        task-id (get-in request [:path-params :id])
-        task-id-uuid (UUID/fromString task-id)]
-    (swap! store dissoc task-id-uuid)
+        task-id (UUID/fromString (get-in request [:path-params :id]))]
+    (swap! store dissoc task-id)
     {:status 200 :body {:message "Task removed successfully!"}}))
 
 (defn update-tasks [request]
-  (let [task-id (get-in request [:path-params :id])
-        task-id-uuid (UUID/fromString task-id)
+  (let [task-id (UUID/fromString (get-in request [:path-params :id]))
         name (get-in request [:query-params :name])
         status (get-in request [:query-params :status])
-        tarefa (create-tasks-map task-id-uuid name status)
+        task (create-tasks-map task-id name status)
         store (:store request)]
-    (swap! store assoc task-id-uuid tarefa)
+    (swap! store assoc task-id task)
     {:status 200 :body {:message "Task updated successfully!"
-                        :task     tarefa}}))
+                        :task    task}}))

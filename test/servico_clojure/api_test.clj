@@ -22,6 +22,7 @@
           _ (api/test-request :patch (str "/task/" task2-id "?name=EstudarClojure&status=dificil"))
           tasks-processed (clojure.edn/read-string (:body (api/test-request :get "/task")))
           task-updated (-> tasks-processed vals first)]
+
       (is (= 2 (count tasks)))
       (is (= "Correr" (:name task1)))
       (is (= "pendente" (:status task1)))
