@@ -8,8 +8,7 @@
 
   (start [this]
     (println "Start server")
-    (let [service-map (config/create-service-map routes database)
-          server (start/start-server service-map)]
+    (let [server (start/start-server (config/create-service-map routes database))]
       (assoc this :server server :test-request (partial config/test-request server))))
 
   (stop [this]
